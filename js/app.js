@@ -1802,4 +1802,19 @@ function initApp() {
   renderPackages();
   renderCoverflow();
   renderArcSlider();
-});
+}
+
+// Auto-run when DOM is ready or immediately if already loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+
+// Emergency safety fallback: dismiss preloader after 2s if anything ever stalls
+setTimeout(() => {
+  const pl = document.getElementById('flightPreloader');
+  if (pl && !pl.classList.contains('fade-out')) {
+    pl.classList.add('fade-out');
+  }
+}, 2000);
